@@ -1,0 +1,18 @@
+Determine la operación a realizar:
+
+1. BFS
+2. DFS
+
+Seleccione el nodo inicial: 
+Seleccione el nodo final: 
+
+Este es el BFS: 
+   Número de nodos = 15
+   Nodo inicial -> 1
+   Nodo final -> 14
+   Coste -> 58
+   Generados: 2, 3, 3, 4, 2, 4, 11, 4, 11, 3, 6, 12, 2, 6, 12, 6, 12, 5, 7, 9, 10, 5, 5, 7, 9, 10, 5, 5, 7, 9, 10, 5, 12, 13, 8, 15, 15, 6, 13, 12, 13, 8, 15, 15, 6, 13, 12, 13, 8, 15, 15, 6, 13, 8, 13, 14, 9, 7, 8, 8, 13, 14, 9, 7, 8, 8, 13, 14, 9, 7, 8, 7, 14, 
+   Visitados: 1, 2, 3, 3, 4, 4, 11, 4, 11, 6, 12, 6, 12, 6, 12, 5, 7, 9, 10, 5, 5, 7, 9, 10, 5, 5, 7, 9, 10, 5, 13, 8, 15, 15, 13, 13, 8, 15, 15, 13, 13, 8, 15, 15, 13, 8, 
+   Camino: [1] <- [2] <- [4] <- [6] <- [7] <- [8] <- [14] <- 
+   Número aristas totales -> 46
+
