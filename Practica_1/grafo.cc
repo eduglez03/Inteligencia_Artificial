@@ -76,7 +76,6 @@ bool Grafo::bfs(Nodo* inicial, Nodo* final, int total_nodos, double coste_final,
     int padre_actual = actual->get_identificador();
     pila.pop();
 
-    std::cout << "si" << std::endl;
     if (actual->get_identificador() == final->get_identificador()) {
       while (actual != nullptr) {
         camino.push_back(actual->get_identificador());
