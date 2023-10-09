@@ -1,18 +1,29 @@
-Determine la operación a realizar:
-
-1. BFS
-2. DFS
-
-Seleccione el nodo inicial: 
-Seleccione el nodo final: 
+Primer fichero Modificacion
 
 Este es el BFS: 
    Número de nodos = 15
-   Nodo inicial -> 1
-   Nodo final -> 15
-   Coste -> 30
-   Generados: 2, 3, 3, 4, 2, 4, 11, 4, 11, 3, 6, 12, 2, 6, 12, 6, 12, 5, 7, 9, 10, 5, 5, 7, 9, 10, 5, 5, 7, 9, 10, 5, 12, 13, 8, 15, 6, 13, 12, 13, 8, 15, 6, 13, 12, 13, 8, 15, 6, 13, 
-   Visitados: 1, 2, 3, 3, 4, 4, 11, 4, 11, 6, 12, 6, 12, 6, 12, 5, 7, 9, 10, 5, 5, 7, 9, 10, 5, 5, 7, 9, 10, 5, 13, 8, 
-   Camino: [1] <- [2] <- [4] <- [6] <- [7] <- [15] <- 
-   Número aristas totales -> 32
+   Nodo inicial -> 8
+   Nodo final -> 6
+   Coste -> -15
+   Generados: 2, 3, 15, 5, 7, 4, 6, 6, 11, 14, 
+   Visitados: 8, 2, 3, 15, 5, 7, 4, 
+   Camino: [8] <- [2] <- [5] <- [6] <- 
+   Número aristas totales -> 7
 
+Este es el DFS: 
+   Número de nodos = 15
+   Nodo inicial -> 8
+   Nodo final -> 6
+   Coste -> -15
+   Generados: 2, 3, 15, 5, 7, 6, 11, 14, 10, 
+   Visitados: 8, 15, 3, 2, 7, 14, 10, 11, 
+   Camino: [8] <- [2] <- [7] <- [6] <- 
+   Número aristas totales -> 8
+
+Segundo fichero Modificacion
+
+Este es el BFS: 
+No se puedo encontrar un camino desde 8 hasta 9
+
+Este es el DFS: 
+No se puedo encontrar un camino desde 8 hasta 9

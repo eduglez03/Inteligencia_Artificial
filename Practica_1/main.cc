@@ -52,7 +52,6 @@ int main(int argc, char* argv[]) {
   std::cin >> nodo_final;
   std::cout << std::endl;
   
-
   int total_nodos{0};
 
   std::ifstream archivo_entrada(argv[1]);  // Abrimos el fichero de entrada
