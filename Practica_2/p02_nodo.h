@@ -13,6 +13,10 @@ class Nodo {
     std::pair<int,int> get_coordenadas(); // Getter coordenadas nodo
     int get_heuristico(); // Getter heuristico
     int get_coste(); // Getter coste
+    // Metodo que calcula el heuristico del nodo
+    int calcular_heuristico_manhattan(const std::pair<int, int>& destino) {
+      return std::abs(Coordenadas_.first - destino.first) + std::abs(Coordenadas_.second - destino.second);
+    }
     
   private:
     std::pair<int, int> Coordenadas_; // Coordenadas del nodo en la matriz
