@@ -13,6 +13,8 @@ class Laberinto {
     std::pair<int, int> get_posEntrada() {return posEntrada_;}
     std::pair<int, int> get_posSalida() {return posSalida_;}
 
+    void CambiarValor(int x, int y); // Acceder a una posicion concreta del laberinto
+
   private:
     std::vector<std::vector<int>> laberinto_;
     int numeroFilas_;
@@ -31,8 +33,8 @@ Laberinto::Laberinto(char* fichero_entrada) {
 
   laberinto_.resize(numeroFilas_ + 1 * numeroColumnas_ + 1); // Resize de la matriz con las filas y columnas
 
-  for (int i = 0; i < numeroFilas_; i++) {
-    for (int j = 0; j < numeroColumnas_; j++) {
+  for (int i = 0; i < numeroFilas_ - 1; i++) {
+    for (int j = 0; j < numeroColumnas_ - 1; j++) {
       fichero >> elemento_leido;
       laberinto_[i,j].push_back(elemento_leido);
       if (elemento_leido == 3) {
@@ -45,4 +47,9 @@ Laberinto::Laberinto(char* fichero_entrada) {
       }
     }
   }
+}
+
+// Metodo que cambia un valor del laberinto
+void Laberinto::CambiarValor(int x, int y) {
+  laberinto_.at(x).at(y) = '*';
 }
