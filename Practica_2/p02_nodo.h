@@ -5,6 +5,7 @@ class Nodo {
   public:
     Nodo(std::pair<int, int>, int, int, int, std::pair<int,int>); // Constructor de la clase Nodo
     Nodo() {} // Constructor por defecto
+    ~Nodo() {} // Destructor de la clase Nodo
 
     void set_coordenadas(std::pair<int, int> coordenadas) { Coordenadas_ = coordenadas; } // Setter coordenadas nodo en la matriz
     void set_heuristico(int heuristico) { Heuristico_ = heuristico; } // Setter heuristico
@@ -16,13 +17,18 @@ class Nodo {
     int get_heuristico() const { return Heuristico_; } // Getter heuristico
     int get_coste() { return Coste_; } // Getter coste
     int get_funcionF() { return FuncionF_; } // Getter funcion f
-    std::pair<int,int> get_Coordenadaspadre() { return CoordenadasPadre_; } // Getter padre
+    std::pair<int,int> get_Coordenadaspadre() const { return CoordenadasPadre_; } // Getter padre
 
     // Sobrecarga del operador <
     bool operator<(const Nodo& otro) const {
       return FuncionF_ < otro.FuncionF_;
     }
     
+    // Sobrecarga del operador de igualdad
+    bool operator==(const Nodo& otro) const {
+      return Coordenadas_ == otro.Coordenadas_;
+    }
+
   private:
     std::pair<int, int> Coordenadas_; // Coordenadas del nodo en la matriz
     int Heuristico_; // Distancia estimada al objeto

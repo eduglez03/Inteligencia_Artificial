@@ -1,6 +1,4 @@
-#include<iostream>
 #include<fstream>
-#include<vector>
 
 #include "p02_aestar.h"
 
@@ -18,26 +16,41 @@ int main (int argc, char* argv[]) {
 
   // Generamos el laberinto
   Laberinto laberinto(argv[1]);
+  std::cout << laberinto.get_posEntrada().first << " " << laberinto.get_posEntrada().second << std::endl;
+  std::cout << laberinto.get_posSalida().first << " " << laberinto.get_posSalida().second << std::endl;
 
   // Buscamos la salida al laberinto
   Astar astar;
-  astar.set_laberinto(laberinto.get_laberinto());
+  astar.set_laberinto(laberinto);
   
 
-  if (astar.obtenerCamino(laberinto.get_posEntrada(), laberinto.get_posSalida())) {
-    // Imprimir resultado
-    for(int i = 0; i < laberinto.get_numFilas(); i++) {
-      for(int j = 0; j < laberinto.get_numColumnas(); j++) {
-        for(auto nodo : astar.get_nodosCerrados()) {
-          if(nodo.get_coordenadas().first == i && nodo.get_coordenadas().second == j) {
+  if (astar.obtenerCamino(laberinto.get_posEntrada(), laberinto.get_posSalida()) == true) {
+    
+    for (auto elemento : astar.get_nodosCerrados()) {
+      std::cout << "(" << elemento.get_coordenadas().first << "," << elemento.get_coordenadas().second << ")   " <<  "   Heuristico: " << elemento.get_heuristico() << "   Coste: " << elemento.get_coste() << "   Funcion F: " << elemento.get_funcionF() << std::endl;
+    }
+    /*
+    for (int i = 0; i < laberinto.get_numFilas(); i++) {
+      for (int j = 0; j < laberinto.get_numColumnas(); j++) {
+        for (auto& elemento : astar.get_nodosCerrados()) {
+          if ((i == elemento.get_coordenadas().first) && (j = elemento.get_coordenadas().second)) {
             laberinto.CambiarValor(i, j);
           }
         }
       }
     }
-  } else {
+
+    for (int i = 0; i < laberinto.get_numFilas(); i++) {
+      for (int j = 0; j < laberinto.get_numColumnas(); j++) {
+        std::cout << laberinto.get_laberinto().at(i).at(j) << " ";
+      }
+      std::cout << std::endl;
+    }
+    */
+
+  } else 
     std::cout << "No se ha encontrado el camino al final del laberinto" << std::endl;
-  }
+
 
   return 0;
 }
