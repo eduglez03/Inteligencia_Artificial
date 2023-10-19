@@ -19,10 +19,10 @@ class Laberinto {
 
     void CambiarValor(int x, int y); // Acceder a una posicion concreta del laberinto
     void visitar(int x, int y);
-    void resizeVisitados();
-    bool es_Visitado(int x, int y);
-    void Imprimir();
-    void ImprimirVisitados();
+    //void resizeVisitados();
+    //bool es_Visitado(int x, int y);
+    //void Imprimir();
+    //void ImprimirVisitados();
 
   private:
     std::vector<std::vector<int>> laberinto_;
@@ -30,7 +30,7 @@ class Laberinto {
     int numeroColumnas_;
     std::pair<int, int> posEntrada_; // Posicion entrada laberinto 
     std::pair<int, int> posSalida_; // Posicion salida laberinto 
-    std::vector<std::vector<bool>> visitados_;
+    //std::vector<std::vector<bool>> visitados_;
 };
 
 // Constructor de la clase
@@ -42,7 +42,7 @@ Laberinto::Laberinto(char* fichero_entrada) {
   fichero >> numeroColumnas_; // Almacenamos el numero de columnas de la matriz
 
   laberinto_.resize(numeroFilas_, std::vector<int>(numeroColumnas_, 0)); // Resize de la matriz con las filas y columnas
-  resizeVisitados();
+  //resizeVisitados();
 
   for (int i = 0; i < numeroFilas_; i++) {
     for (int j = 0; j < numeroColumnas_; j++) {
@@ -60,6 +60,8 @@ Laberinto::Laberinto(char* fichero_entrada) {
   }
 }
 
+
+/*
 // Metodo que cambia un valor del laberinto
 void Laberinto::CambiarValor(int x, int y) {
   laberinto_.at(x).at(y) = '*';
@@ -95,3 +97,5 @@ void Laberinto::ImprimirVisitados() {
     std::cout << std::endl;
   }
 }
+
+*/

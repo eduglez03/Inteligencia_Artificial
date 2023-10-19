@@ -8,6 +8,12 @@
 #include "p02_nodo.h"
 #include "laberinto.h"
 
+
+enum movimientos {A, AD, D, DB, B, BI, I, IA};
+const short movimiento_i[] = {-1, -1, 0, 1, 1, 1, 0, -1};
+const short movimiento_j[] = {0, 1, 1, 1, 0, -1, -1, -1};
+
+
 class Astar {
   public:
     Astar() {}; // Constructor por defecto
@@ -23,11 +29,11 @@ class Astar {
     bool obtenerCamino(std::pair<int, int>, std::pair<int, int>);
     Nodo* menorCoste(const std::vector<Nodo*>& nodos);
     int CalcularHeuristico(const std::pair<int, int>& origen, const std::pair<int, int>& destino);
-    std::vector<Nodo*> obtenerHijos(const std::pair<int, int>& coordenadas);
+    std::vector<Nodo*> obtenerHijos(Nodo* padre);
     int CalularF(int heuristico, int coste);
-    bool comprobarRango(int fila, int columna, int filas, int columnas);
-    void Visitar(int x, int y);
-    bool Visitados(int x, int y);
+    bool comprobarRango(std::pair<int,int> hijo);
+    bool ActualizarCoste(Nodo* nodo);
+    bool AnalizarCerrados(Nodo* nodo);
 
   private:
     Laberinto laberinto_; // Laberinto
@@ -38,8 +44,13 @@ class Astar {
 };
 
 // Metodo que comprueba si una coordenada esta dentro del rango de la matriz
-bool Astar::comprobarRango(int fila, int columna, int filas, int columnas) {
-  return (fila >= 0 && fila < filas && columna >= 0 && columna < columnas);
+bool Astar::comprobarRango(std::pair<int,int> hijo) {
+
+  if(laberinto_.get_laberinto().at(hijo.first).at(hijo.second) == 1 || hijo.second >= laberinto_.get_numColumnas() || hijo.first >= laberinto_.get_numFilas() || hijo.second < 0 || hijo.first < 0) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 // Metodo que calcula la funcion F
@@ -60,65 +71,6 @@ int Astar::CalcularHeuristico(const std::pair<int, int>& origen, const std::pair
   return heuristica;
 }
 
-// Método para obtener las coordenadas adyacentes
-std::vector<Nodo*> Astar::obtenerHijos(const std::pair<int, int>& coordenadas) {
-  std::vector<Nodo*> adyacentes;
-
-  // Definir las direcciones posibles: arriba, abajo, izquierda, derecha, diagonal superior izquierda, diagonal superior derecha, diagonal inferior izquierda, diagonal inferior derecha
-  int direcciones[8][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-
-  // Obtener las coordenadas adyacentes
-  for (const auto& direccion : direcciones) {
-    int nuevaFila = coordenadas.first + direccion[0];
-    int nuevaColumna = coordenadas.second + direccion[1];
-
-    // No se puede volver a la posicion anterior
-    if (nuevaFila != 0 && nuevaColumna != 0) {
-      // No se puede acceder a una posicion con un obstaculo
-      if(laberinto_.get_laberinto()[nuevaFila][nuevaColumna] != 1) {
-        // Verificar si las nuevas coordenadas están dentro del rango de la matriz
-        if (comprobarRango(nuevaFila, nuevaColumna, laberinto_.get_numFilas(), laberinto_.get_numColumnas())) {
-          if (direccion == direcciones[0] || direccion == direcciones[1] || direccion == direcciones[2] || direccion == direcciones[3]) {
-            if (Visitados(nuevaFila, nuevaColumna)) {
-              Nodo* nuevo_nodo = new Nodo(std::make_pair(nuevaFila, nuevaColumna), costeHV_, 0, 0, coordenadas);
-              adyacentes.push_back(nuevo_nodo);
-              Visitar(nuevaFila, nuevaColumna);
-            }
-          } else {
-              if (Visitados(nuevaFila, nuevaColumna)) {
-                Nodo* nuevo_nodo = new Nodo(std::make_pair(nuevaFila, nuevaColumna), costeDiagonal_, 0, 0, coordenadas);
-                adyacentes.push_back(nuevo_nodo);
-                Visitar(nuevaFila, nuevaColumna);
-              }
-          }
-          //std::cout << "Coordenadas: " << nuevaFila << " " << nuevaColumna << std::endl;
-        }
-      } 
-    } 
-  }
-
-  return adyacentes;
-}
-
-
-
-void Astar::Visitar(int x, int y) {
-  laberinto_.visitar(x, y);
-}
-
-
-
-bool Astar::Visitados(int x, int y) {
-  return laberinto_.es_Visitado(x, y);
-}
-
-
-
-
-
-
-
-
 // Obtener el nodo de menor coste de la lista de nodos abiertos
 Nodo* Astar::menorCoste(const std::vector<Nodo*>& nodos) {
   // Utilizar std::min_element con un comparador personalizado
@@ -135,6 +87,73 @@ Nodo* Astar::menorCoste(const std::vector<Nodo*>& nodos) {
 
 
 
+bool Astar::ActualizarCoste(Nodo* nodo) {
+  for(int i = 0; i < nodosAbiertos_.size(); i++) {
+    if(nodosAbiertos_.at(i) == nodo) {
+      if(nodosAbiertos_.at(i)->get_funcionF() > nodo->get_funcionF()) {
+        nodosAbiertos_.at(i) = nodo;
+        return true;
+      }
+      return false;
+    }
+  }
+  return false;
+}
+
+
+
+
+bool Astar::AnalizarCerrados(Nodo* nodo) {
+  for(int i = 0; i < nodosCerrados_.size(); i++) {
+    if(nodosCerrados_.at(i) == nodo) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+
+
+
+
+
+
+
+// Método para obtener las coordenadas adyacentes
+std::vector<Nodo*> Astar::obtenerHijos(Nodo* padre) {
+  std::vector<Nodo*> adyacentes;
+
+  // Obtener las coordenadas adyacentes
+  for (int i = A; i < IA; i++) {
+    int nuevaFila = padre->get_coordenadas().first + movimiento_i[i];
+    int nuevaColumna = padre->get_coordenadas().second + movimiento_j[i];
+    
+    std::pair<int,int> hijo(nuevaFila, nuevaColumna);
+
+    // No se puede volver a la posicion anterior
+    if (hijo != padre->get_coordenadas()) {
+      if (comprobarRango(hijo)) {
+        if (i % 2 == 0) {
+          int g_susesores = padre->get_coste() + costeHV_;
+          Nodo* nuevo_nodo = new Nodo(std::make_pair(nuevaFila, nuevaColumna), g_susesores, 0, 0, padre->get_coordenadas(), true);
+          if (ActualizarCoste(nuevo_nodo) == false && AnalizarCerrados(nuevo_nodo) == false) {
+            adyacentes.push_back(nuevo_nodo);
+          }
+        }
+        else if (i % 2 != 0){
+          int g_susesores = padre->get_coste() + costeDiagonal_;
+          Nodo* nuevo_nodo = new Nodo(std::make_pair(nuevaFila, nuevaColumna), g_susesores, 0, 0, padre->get_coordenadas(), true);
+          if (ActualizarCoste(nuevo_nodo) == false && AnalizarCerrados(nuevo_nodo) == false) {
+            adyacentes.push_back(nuevo_nodo);
+          }
+        }
+      }
+    }
+  }
+  return adyacentes;
+}
+
 
 
 
@@ -144,37 +163,32 @@ bool Astar::obtenerCamino(std::pair<int, int> inicio, std::pair<int, int> destin
   std::pair<int,int> coordenadas_padreInicio;
   coordenadas_padreInicio.first = -1;
   coordenadas_padreInicio.second = -1;
-  Nodo* Inicio = new Nodo(inicio,0,0,0, coordenadas_padreInicio);
+  Nodo* Inicio = new Nodo(inicio,0,0,0, coordenadas_padreInicio, true);
 
   // Establecemos valores iniciales al primer nodo
   Inicio->set_heuristico(CalcularHeuristico(Inicio->get_coordenadas(), destino));
   Inicio->set_funcionF(Inicio->get_heuristico());
 
-  // Añadimos el nodo Inicial a la lista de nodos abiertos
+  // Añadimos el nodo Inicial a la lista de nodos abiertos y visitados
   nodosAbiertos_.push_back(Inicio);
 
   while (!nodosAbiertos_.empty()) {
     Nodo* coste_menor = menorCoste(nodosAbiertos_);
     
     if (coste_menor->get_coordenadas() == destino) { // Si el nodo actual es igual al final se encontro el camino minimo
-      Nodo* Final = new Nodo(destino, coste_menor->get_coste(), 0, coste_menor->get_funcionF(), coste_menor->get_coordenadas());
+      Nodo* Final = new Nodo(destino, coste_menor->get_coste(), 0, coste_menor->get_funcionF(), coste_menor->get_coordenadas(), true);
       nodosCerrados_.push_back(Final);
       return true;
     }
 
     // Comprobamos si el nodo actual es igual al final
     // Generamos los hijos del nodo actual
-    std::vector<Nodo*> hijos = obtenerHijos(coste_menor->get_coordenadas()); 
-    for(auto& elemento : hijos) {
-      std::cout << elemento->get_coordenadas().first << " " << elemento->get_coordenadas().second << std::endl;
-    }
+    std::vector<Nodo*> hijos = obtenerHijos(coste_menor); 
 
     // Evaluamos los hijos del nodo actual
     for (auto& elemento : hijos) {
       elemento->set_heuristico(CalcularHeuristico(elemento->get_coordenadas(), destino));
-      elemento->set_coste(elemento->get_coste() + coste_menor->get_coste());
-      elemento->set_funcionF(CalularF(elemento->get_heuristico(), elemento->get_coste()));
-      //std::cout << "(" << elemento.get_coordenadas().first << "," << elemento.get_coordenadas().second << ")   " <<  "   Heuristico: " << elemento.get_heuristico() << "   Coste: " << elemento.get_coste() << "   Funcion F: " << elemento.get_funcionF() << std::endl;
+      elemento->set_funcionF(elemento->get_coste() + elemento->get_heuristico());
     }
 
     // Añadimos los nodos hijos al vector de nodos abiertos

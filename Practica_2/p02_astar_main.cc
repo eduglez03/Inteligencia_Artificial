@@ -18,16 +18,10 @@ int main (int argc, char* argv[]) {
   Laberinto laberinto(argv[1]);
   std::cout << laberinto.get_posEntrada().first << " " << laberinto.get_posEntrada().second << std::endl;
   std::cout << laberinto.get_posSalida().first << " " << laberinto.get_posSalida().second << std::endl;
-  //laberinto.Imprimir();
-
-  //std::cout << std::endl;
-
-  //laberinto.ImprimirVisitados();
 
   // Buscamos la salida al laberinto
   Astar astar;
   astar.set_laberinto(laberinto);
-  
 
   if (astar.obtenerCamino(laberinto.get_posEntrada(), laberinto.get_posSalida()) == true) {
     for (auto elemento : astar.get_nodosCerrados()) {

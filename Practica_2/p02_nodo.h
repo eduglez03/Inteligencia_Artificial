@@ -3,7 +3,7 @@
 
 class Nodo {
   public:
-    Nodo(std::pair<int, int>, int, int, int, std::pair<int,int>); // Constructor de la clase Nodo
+    Nodo(std::pair<int, int>, int, int, int, std::pair<int,int>, bool visitado); // Constructor de la clase Nodo
     Nodo() {} // Constructor por defecto
     ~Nodo() {} // Destructor de la clase Nodo
 
@@ -41,10 +41,11 @@ class Nodo {
 };
 
 // Constructor de la clase Nodo
-Nodo::Nodo(std::pair<int, int> Coordenadas, int Coste, int Heuristico, int funcionF, std::pair<int,int> padre) {
+Nodo::Nodo(std::pair<int, int> Coordenadas, int Coste, int Heuristico, int funcionF, std::pair<int,int> padre, bool visitado) {
   Coordenadas_ = Coordenadas;
   Coste_ = Coste;
   Heuristico_ = Heuristico;
   FuncionF_ = funcionF;
   CoordenadasPadre_ = padre;
+  visitado_ = visitado;
 }
