@@ -22,9 +22,9 @@ int main (int argc, char* argv[]) {
   // Buscamos la salida al laberinto
   Astar astar;
   astar.set_laberinto(laberinto);
-
+  
   if (astar.obtenerCamino(laberinto.get_posEntrada(), laberinto.get_posSalida()) == true) {
-    for (auto elemento : astar.get_nodosCerrados()) {
+    for (const auto& elemento : astar.get_nodosCerrados()) {
       std::cout << "(" << elemento->get_coordenadas().first << "," << elemento->get_coordenadas().second << ")   " <<  "   Heuristico: " << elemento->get_heuristico() << "   Coste: " << elemento->get_coste() << "   Funcion F: " << elemento->get_funcionF() << std::endl;
     }
     /*

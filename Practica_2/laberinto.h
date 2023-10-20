@@ -21,8 +21,7 @@ class Laberinto {
     void visitar(int x, int y);
     //void resizeVisitados();
     //bool es_Visitado(int x, int y);
-    //void Imprimir();
-    //void ImprimirVisitados();
+    void Imprimir();
 
   private:
     std::vector<std::vector<int>> laberinto_;
@@ -79,6 +78,7 @@ void Laberinto::visitar(int x, int y) {
 bool Laberinto::es_Visitado(int x, int y) {
   return visitados_[x][y];
 }
+*/
 
 void Laberinto::Imprimir() {
   for (int i = 0; i < numeroFilas_; i++) {
@@ -89,13 +89,4 @@ void Laberinto::Imprimir() {
   }
 }
 
-void Laberinto::ImprimirVisitados() {
-  for (int i = 0; i < numeroFilas_; i++) {
-    for (int j = 0; j < numeroColumnas_; j++) {
-      std::cout << visitados_[i][j] << " ";
-    }
-    std::cout << std::endl;
-  }
-}
 
-*/
