@@ -18,6 +18,7 @@ class Laberinto {
     void set_laberinto(const std::vector<std::vector<int>>& laberinto) { laberinto_ = laberinto; }
     void set_posEntrada(int x, int y) { posEntrada_.first = x; posEntrada_.second = y; }
     void set_posSalida(int x, int y) { posSalida_.first = x; posSalida_.second = y; }
+    void set_valor(int x, int y, int valor) { laberinto_[x][y] = valor; }
 
     void CambiarValor(int x, int y); // Acceder a una posicion concreta del laberinto
     void Imprimir();

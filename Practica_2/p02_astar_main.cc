@@ -2,7 +2,6 @@
 
 #include "p02_aestar.h"
 
-
 // indica pasillo
 #define PASS_ID  0
 // indica pared
@@ -23,53 +22,67 @@
 
 
 void Usage(int argc, char* argv[]) {
+  if(argc != 2) {
+    std::cout << argv[0] << ": Falta el fichero con el laberinto" << std::endl;
+    std::cout << "Pruebe " << argv[0] << " --help para más información" << std::endl;
+    exit(EXIT_SUCCESS);
+  }
+}
 
+void Help() {
+  std::cout << "Este programa calcula y muestra el camino más corto para salir del laberinto" << std::endl;
+  std::cout << "Ejecución: ./p02_astar_main <fichero_laberinto>" << std::endl;
+  std::cout << "El fichero con el laberinto debe tener el siguiente formato:" << std::endl;
+  std::cout << "  - La primera línea contiene el número de filas y columnas del laberinto separados por un espacio" << std::endl;
+  std::cout << "  - Las siguientes líneas contienen el laberinto en sí, donde cada posición puede ser:" << std::endl;
+  std::cout << "    - 0: pasillo" << std::endl;
+  std::cout << "    - 1: pared" << std::endl;
+  std::cout << "    - 3: inicio del laberinto" << std::endl;
+  std::cout << "    - 4: salida del laberinto" << std::endl;
+  exit(EXIT_SUCCESS);
 }
 
 
-
 int main (int argc, char* argv[]) {
-  // Hacer comprobaciones ficheros entrada
-
   // Comprobamos que la ejecucion y los parametros sean correctos
-  Usage(argc, argv); 
+  if (std::string(argv[1]) == "--help") {
+    Help();
+    exit(EXIT_SUCCESS);
+  } else {
+    Usage(argc, argv); 
+  }
 
   // Generamos el laberinto
-  Laberinto laberinto(argv[1]);
+  Laberinto* laberinto = new Laberinto(argv[1]);
 
 
   std::cout << "Porgrama que calcula y muestra el camino mas corto para salir del laberinto" << std::endl << std::endl;
   std::cout << "El laberinto se ha generado a partir del fichero: " << argv[1] << std::endl;
-  std::cout << "Numero de Filas: " << laberinto.get_numFilas() << " Numero de columnas: " << laberinto.get_numColumnas() << std::endl;
+  std::cout << "Numero de Filas: " << laberinto->get_numFilas() << " Numero de columnas: " << laberinto->get_numColumnas() << std::endl;
   
-  std::cout << "Posicion de entrada al laberinto: " << "(" << laberinto.get_posEntrada().first << ", " << laberinto.get_posEntrada().second << ")"<< std::endl;
-  std::cout << "Posicion de salida al laberinto: " << "(" << laberinto.get_posSalida().first << ", " << laberinto.get_posSalida().second << ")" << std::endl << std::endl;
+  std::cout << "Posicion de entrada al laberinto: " << "(" << laberinto->get_posEntrada().first << ", " << laberinto->get_posEntrada().second << ")"<< std::endl;
+  std::cout << "Posicion de salida al laberinto: " << "(" << laberinto->get_posSalida().first << ", " << laberinto->get_posSalida().second << ")" << std::endl << std::endl;
   
-  
-/*
   std::cout << "¿Quiere cambiar las posiciones de entrada y salida? (s/n)" << std::endl;
   char respuesta;
   std::cin >> respuesta;
 
   if (respuesta == 's' || respuesta == 'S') {
     std::cout << "Introduzca la fila y la columna de la entrada" << std::endl;
-    int fila, columna;
-    std::cin >> fila >> columna;
-    laberinto.get_laberinto().at(laberinto.get_posEntrada().first).at(laberinto.get_posEntrada().second) = 1;
-    laberinto.Imprimir();
-    laberinto.set_posEntrada(fila, columna);
-    laberinto.get_laberinto()[laberinto.get_posEntrada().first][laberinto.get_posEntrada().second] = 3;
+    int fila1, columna1;
+    std::cin >> fila1 >> columna1;
+    laberinto->get_laberinto()[laberinto->get_posEntrada().first][laberinto->get_posEntrada().second] = 1;
+    laberinto->set_posEntrada(fila1, columna1);
+    laberinto->get_laberinto().at(laberinto->get_posEntrada().first).at(laberinto->get_posEntrada().second) = 3;
 
     std::cout << "Introduzca la fila y la columna de la salida" << std::endl;
-    std::cin >> fila >> columna;
-    laberinto.get_laberinto()[laberinto.get_posSalida().first][laberinto.get_posSalida().second] = 1;
-    laberinto.set_posSalida(fila, columna);
-    laberinto.get_laberinto()[laberinto.get_posSalida().first][laberinto.get_posSalida().second] = 4;
-
-    std::cout << "El laberinto generado es: " << std::endl;
-    laberinto.Imprimir();
+    int fila2, columna2;
+    std::cin >> fila2 >> columna2;
+    laberinto->get_laberinto()[laberinto->get_posSalida().first][laberinto->get_posSalida().second] = 1;
+    laberinto->set_posSalida(fila2, columna2);
+    laberinto->get_laberinto().at(laberinto->get_posSalida().first).at(laberinto->get_posSalida().second) = 4;
   }
-*/
+
 
   std::cout << "Seleccione la Heurística que desea emplear: " << std::endl;
   std::cout << "1. Distancia Manhattan" << std::endl;
@@ -79,10 +92,10 @@ int main (int argc, char* argv[]) {
 
   // Buscamos la salida al laberinto
   Astar astar;
-  astar.set_laberinto(laberinto);
+  astar.set_laberinto(*laberinto);
   
   // Comprobamos si se ha encontrado el camino y lo imprimimos
-  if (astar.ObtenerCamino(laberinto.get_posEntrada(), laberinto.get_posSalida(), heuristica) == true) {
+  if (astar.ObtenerCamino(laberinto->get_posEntrada(), laberinto->get_posSalida(), heuristica) == true) {
     std::vector<Nodo> camino;
 
     Nodo revisado = astar.get_nodosCerrados().back();
@@ -101,14 +114,15 @@ int main (int argc, char* argv[]) {
     std::reverse(camino.begin(), camino.end());
     camino.push_back(Final); 
 
+/*
     for (int i = 0; i < camino.size(); i++) {
       std::cout << "(" << camino[i].get_coordenadas().first << ", " << camino[i].get_coordenadas().second << ")" << std::endl;
     }
+*/
 
-
-    for(int i = 0; i < laberinto.get_numFilas(); i++) {
-      for(int j = 0; j < laberinto.get_numColumnas(); j++) {
-        if (laberinto.get_laberinto()[i][j] == WALL_ID) {
+    for(int i = 0; i < laberinto->get_numFilas(); i++) {
+      for(int j = 0; j < laberinto->get_numColumnas(); j++) {
+        if (laberinto->get_laberinto()[i][j] == WALL_ID) {
           std::cout << WALL_CHR << " ";
         } else {
           bool encontrado = false;

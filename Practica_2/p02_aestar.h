@@ -104,10 +104,6 @@ bool Astar::ComprobarCerrados(const Nodo& nodo) {
   return false;
 }
 
-
-
-
-
 // Metodo que comprueba si el nodo ya esta en la lista de nodos abiertos
 bool Astar::ComprobarAbiertos(const Nodo& nodo) {
   for (int i = 0; i < nodosAbiertos_.size(); i++) {
@@ -118,23 +114,19 @@ bool Astar::ComprobarAbiertos(const Nodo& nodo) {
   return false;
 }
 
-
 // Metodo que actualiza la lista de nodos abiertos si el nodo que estamos analizando tiene un coste menor
 // Metodo que actualiza la lista de nodos abiertos si el nood que estamos analizando tiene un coste menor
 bool Astar::ActualizarCoste(const Nodo& nodo) {
   for (int i = 0; i < nodosAbiertos_.size(); i++) {
     if (nodosAbiertos_[i].get_coordenadas() == nodo.get_coordenadas()) {
-      if (nodosAbiertos_[i] > nodo) {
-        nodosAbiertos_[i] = nodo;
+      if (nodosAbiertos_[i].get_funcionF() > nodo.get_funcionF()) {
+        nodosAbiertos_.at(i) = nodo;
         return true;
       }
-      return false;
     }
   }
   return false;
 }
-
-
 
 // Método para obtener el camino
 bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int, int> destino, int heuristica) {
@@ -203,7 +195,6 @@ bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int,
 
     // Agregamos el nodo actual a la lista de nodos cerrados
     if (!ComprobarCerrados(actual)) {
-      std::cout << "Nodo actual: " << actual.get_coordenadas().first << ", " << actual.get_coordenadas().second << std::endl;
       nodosCerrados_.push_back(actual);
     }
 
