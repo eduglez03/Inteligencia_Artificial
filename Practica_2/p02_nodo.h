@@ -10,14 +10,19 @@ class Nodo {
     void set_coordenadas(std::pair<int, int> coordenadas) { Coordenadas_ = coordenadas; } // Setter coordenadas nodo en la matriz
     void set_heuristico(int heuristico) { Heuristico_ = heuristico; } // Setter heuristico
     void set_coste(int coste) { Coste_ = coste; } // Setter coste
-    void set_padre(std::pair<int,int> padre) { CoordenadasPadre_ = padre; } // Setter padre
+    void set_padre(std::pair<int,int> padre) { Padre_ = padre; } // Setter padre
     void set_funcionF(int funcionF) { FuncionF_ = funcionF; } // Setter funcion f
 
     std::pair<int,int> get_coordenadas() const { return Coordenadas_; } // Getter coordenadas nodo
     int get_heuristico() const { return Heuristico_; } // Getter heuristico
     int get_coste() const { return Coste_; } // Getter coste
     int get_funcionF() const { return FuncionF_; } // Getter funcion f
-    std::pair<int,int> get_Coordenadaspadre() const { return CoordenadasPadre_; } // Getter padre
+    std::pair<int,int> get_Padre() const { return Padre_; } // Getter padre
+
+    // Sobrecarga del operador >
+    bool operator>(const Nodo& otro) const {
+      return FuncionF_ > otro.FuncionF_;
+    }
 
     // Sobrecarga del operador <
     bool operator<(const Nodo& otro) const {
@@ -34,7 +39,7 @@ class Nodo {
     int Heuristico_; // Distancia estimada al objeto
     int Coste_; // Coste acumulado para llegar a este nodo
     int FuncionF_; // Funcion f
-    std::pair<int,int> CoordenadasPadre_; // Puntero al nodo padre
+    std::pair<int,int> Padre_; // Coordenadas del nodo padre
 };
 
 // Constructor de la clase Nodo
@@ -43,5 +48,5 @@ Nodo::Nodo(std::pair<int, int> Coordenadas, int Coste, int Heuristico, int funci
   Coste_ = Coste;
   Heuristico_ = Heuristico;
   FuncionF_ = funcionF;
-  CoordenadasPadre_ = padre;
+  Padre_ = padre;
 }
