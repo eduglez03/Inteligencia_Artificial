@@ -43,9 +43,10 @@ int main (int argc, char* argv[]) {
   std::cout << "Numero de Filas: " << laberinto.get_numFilas() << " Numero de columnas: " << laberinto.get_numColumnas() << std::endl;
   
   std::cout << "Posicion de entrada al laberinto: " << "(" << laberinto.get_posEntrada().first << ", " << laberinto.get_posEntrada().second << ")"<< std::endl;
-  std::cout << "Posicion de salida al laberinto: " << "(" << laberinto.get_posSalida().first << ", " << laberinto.get_posSalida().second << ")" << std::endl;
+  std::cout << "Posicion de salida al laberinto: " << "(" << laberinto.get_posSalida().first << ", " << laberinto.get_posSalida().second << ")" << std::endl << std::endl;
   
-  /*
+  
+/*
   std::cout << "¿Quiere cambiar las posiciones de entrada y salida? (s/n)" << std::endl;
   char respuesta;
   std::cin >> respuesta;
@@ -70,15 +71,18 @@ int main (int argc, char* argv[]) {
   }
 */
 
-
-
+  std::cout << "Seleccione la Heurística que desea emplear: " << std::endl;
+  std::cout << "1. Distancia Manhattan" << std::endl;
+  std::cout << "2. Distancia Euclidea" << std::endl;
+  int heuristica;
+  std::cin >> heuristica;
 
   // Buscamos la salida al laberinto
   Astar astar;
   astar.set_laberinto(laberinto);
   
   // Comprobamos si se ha encontrado el camino y lo imprimimos
-  if (astar.ObtenerCamino(laberinto.get_posEntrada(), laberinto.get_posSalida()) == true) {
+  if (astar.ObtenerCamino(laberinto.get_posEntrada(), laberinto.get_posSalida(), heuristica) == true) {
     std::vector<Nodo> camino;
 
     Nodo revisado = astar.get_nodosCerrados().back();

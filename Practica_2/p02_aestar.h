@@ -4,6 +4,7 @@
 #include<queue>
 #include<utility>
 #include <algorithm> // Para std::min_element
+#include <cmath> // Para std::sqrt
 
 #include "p02_nodo.h"
 #include "laberinto.h"
@@ -30,11 +31,11 @@ class Astar {
 
 
     // Funcion
-    bool ComprobarRango(const std::pair<int, int>& hijo);
-    int CalcularHeuristico(const std::pair<int, int>& origen, const std::pair<int, int>& destino);
+    int Manhattan(const std::pair<int, int>& origen, const std::pair<int, int>& destino);
+    int Euclidea(const std::pair<int, int>& origen, const std::pair<int, int>& destino);
     int CalularF(int heuristico, int coste);
     Nodo MenorCoste();
-    bool ObtenerCamino(const std::pair<int, int>, const std::pair<int, int>);
+    bool ObtenerCamino(const std::pair<int, int>, const std::pair<int, int>, int heuristica);
     bool ComprobarAbiertos(const Nodo& nodo);
     bool ComprobarCerrados(const Nodo& nodo);
     bool ActualizarCoste(const Nodo& nodo);
@@ -66,7 +67,7 @@ Nodo Astar::MenorCoste() {
 }
 
 // Metodo que calcula el heuristico del nodo
-int Astar::CalcularHeuristico(const std::pair<int, int>& origen, const std::pair<int, int>& destino) {
+int Astar::Manhattan(const std::pair<int, int>& origen, const std::pair<int, int>& destino) {
   const int constante{3};
   
   int distanciaHorizontal = std::abs(destino.first - origen.first);
@@ -77,6 +78,16 @@ int Astar::CalcularHeuristico(const std::pair<int, int>& origen, const std::pair
 
   return heuristica;
 }
+
+// Metodo que calcula el heuristico del nodo
+int Astar::Euclidea(const std::pair<int, int>& origen, const std::pair<int, int>& destino) {
+  // Fórmula de la distancia euclidiana: sqrt((x2 - x1)^2 + (y2 - y1)^2)
+  double distanciaX = destino.first - origen.first;
+  double distanciaY = destino.second - destino.second;
+
+  return std::sqrt(distanciaX * distanciaX + distanciaY * distanciaY);
+}
+
 
 // Metodo que calcula la funcion F
 int Astar::CalularF(int heuristico, int coste) {
@@ -126,13 +137,22 @@ bool Astar::ActualizarCoste(const Nodo& nodo) {
 
 
 // Método para obtener el camino
-bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int, int> destino) {
+bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int, int> destino, int heuristica) {
   // Creamos un nuevo nodo con las coordenadas del nodo inicial y final
   std::pair<int,int> coordenadaspadre(-1,-1);
   Nodo Inicio(inicio,0,0,0, coordenadaspadre);
 
   // Establecemos valores iniciales al primer nodo
-  Inicio.set_heuristico(CalcularHeuristico(Inicio.get_coordenadas(), destino));
+  if(heuristica == 1) {
+    Inicio.set_heuristico(Manhattan(Inicio.get_coordenadas(), destino));
+  }
+  else if (heuristica == 2) {
+    Inicio.set_heuristico(Euclidea(Inicio.get_coordenadas(), destino));
+  }
+  else {
+    throw std::runtime_error("La heurística seleccionada no es válida.");
+  }
+
   Inicio.set_funcionF(Inicio.get_heuristico());
 
   // Añadimos el nodo Inicial a la lista de nodos abiertos
@@ -161,10 +181,20 @@ bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int,
         if (nuevo_i <= laberinto_.get_numFilas() && nuevo_j <= laberinto_.get_numColumnas() && nuevo_i >= 0 && nuevo_j >= 0) {
           if (laberinto_.get_laberinto()[nuevo_i][nuevo_j] != 1) {
             int g_sucesor = actual.get_coste() + ((dir % 2 == 0) ? 5 : 7);
-            int h_sucesor = CalcularHeuristico(sucesor_pos, destino);
-            Nodo sucesor(sucesor_pos, g_sucesor, h_sucesor, g_sucesor + h_sucesor, actual.get_coordenadas());
-            if (!ComprobarCerrados(sucesor) && !ActualizarCoste(sucesor)) {
-              nodosAbiertos_.push_back(sucesor);
+            
+            if(heuristica == 1) {
+              int h_sucesor = Manhattan(sucesor_pos, destino);
+              Nodo sucesor(sucesor_pos, g_sucesor, h_sucesor, g_sucesor + h_sucesor, actual.get_coordenadas());
+              if (!ComprobarCerrados(sucesor) && !ActualizarCoste(sucesor)) {
+                nodosAbiertos_.push_back(sucesor);
+              }
+            }
+            else if (heuristica == 2) {
+              int h_sucesor = Euclidea(sucesor_pos, destino);
+              Nodo sucesor(sucesor_pos, g_sucesor, h_sucesor, g_sucesor + h_sucesor, actual.get_coordenadas());
+              if (!ComprobarCerrados(sucesor) && !ActualizarCoste(sucesor)) {
+                nodosAbiertos_.push_back(sucesor);
+              }
             }
           }
         }
@@ -173,6 +203,7 @@ bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int,
 
     // Agregamos el nodo actual a la lista de nodos cerrados
     if (!ComprobarCerrados(actual)) {
+      std::cout << "Nodo actual: " << actual.get_coordenadas().first << ", " << actual.get_coordenadas().second << std::endl;
       nodosCerrados_.push_back(actual);
     }
 
