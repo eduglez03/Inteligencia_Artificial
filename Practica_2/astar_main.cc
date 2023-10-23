@@ -32,10 +32,11 @@ int main (int argc, char* argv[]) {
 
   // Generamos el objeto Astar
   Astar astar;
+  std::vector<Nodo> generados;
   
   // Comprobamos si se ha encontrado el camino y lo imprimimos
-  if (astar.ObtenerCamino(laberinto, heuristica_seleccionada) == true) {
-    ImprimirCamino(astar, laberinto);
+  if (astar.ObtenerCamino(laberinto, heuristica_seleccionada, generados) == true) {
+    ImprimirCamino(astar, laberinto, generados);
   } else {
     std::cout << "No se ha encontrado el camino al final del laberinto" << std::endl;
   }

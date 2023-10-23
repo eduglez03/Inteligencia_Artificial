@@ -107,7 +107,7 @@ bool Astar::ActualizarCoste(const Nodo& nodo) {
 /**
  * @brief Función que obtiene el camino
 */
-bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica) {
+bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica, std::vector<Nodo>& generados) {
   // Creamos un nuevo nodo con las coordenadas del nodo inicial y final
   std::pair<int,int> coordenadaspadre(-1,-1);
   Nodo Inicio(laberinto.get_posEntrada(),0,0,0, coordenadaspadre);
@@ -157,6 +157,7 @@ bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica) {
               Nodo sucesor(sucesor_pos, g_sucesor, h_sucesor, g_sucesor + h_sucesor, actual.get_coordenadas());
               if (!ComprobarCerrados(sucesor) && !ComprobarAbiertos(sucesor)) {
                 nodosAbiertos_.push_back(sucesor);
+                generados.push_back(sucesor);
               } else {
                 ActualizarCoste(sucesor);
               }
@@ -166,6 +167,7 @@ bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica) {
               Nodo sucesor(sucesor_pos, g_sucesor, h_sucesor, g_sucesor + h_sucesor, actual.get_coordenadas());
               if (!ComprobarCerrados(sucesor) && !ComprobarAbiertos(sucesor)) {
                 nodosAbiertos_.push_back(sucesor);
+                generados.push_back(sucesor);
               } else {
                 ActualizarCoste(sucesor);
               }

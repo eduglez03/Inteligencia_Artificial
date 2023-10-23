@@ -43,7 +43,7 @@ class Astar {
     int Euclidea(const std::pair<int, int>& origen, const std::pair<int, int>& destino);  // Funcion Euclidea
     int CalularF(int heuristico, int coste); // Funcion que calcula la funcion F
     Nodo MenorCoste(); // Funcion que obtiene el nodo de menor coste de la lista de nodos abiertos
-    bool ObtenerCamino(Laberinto& laberinto, int heuristica); // Funcion que obtiene el camino
+    bool ObtenerCamino(Laberinto& laberinto, int heuristica, std::vector<Nodo>& generados); // Funcion que obtiene el camino
     bool ComprobarAbiertos(const Nodo& nodo); // Funcion que comprueba si el nodo ya esta en la lista de nodos abiertos
     bool ComprobarCerrados(const Nodo& nodo);  // Funcion que comprueba si el nodo ya esta en la lista de nodos cerrados
     bool ActualizarCoste(const Nodo& nodo);  // Funcion que actualiza la lista de nodos abiertos si el nodo que estamos analizando tiene un coste menor

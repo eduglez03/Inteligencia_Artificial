@@ -100,7 +100,7 @@ void Menu(Laberinto& laberinto, int& heuristica, std::string fichero) {
 /**
  * @brief Función que imprime el camino
 */
-void ImprimirCamino(const Astar astar, Laberinto laberinto) {
+void ImprimirCamino(const Astar& astar, Laberinto laberinto, const std::vector<Nodo> generados) {
   std::cout << "Se ha encontrado el camino al final del laberinto" << std::endl;
   std::cout << "El camino es el siguiente: " << std::endl;
   std::vector<Nodo> camino;
@@ -143,5 +143,5 @@ void ImprimirCamino(const Astar astar, Laberinto laberinto) {
 
   std::cout << "El coste del camino es: " << Final.get_coste() << std::endl;
   std::cout << "El número de nodos inspeccionados es: " << astar.get_nodosCerrados().size() << std::endl;
-  std::cout << "El número de nodos generados es: " << astar.get_nodosAbiertos().size() << std::endl;
+  std::cout << "El número de nodos generados es: " << generados.size() << std::endl;
 }
