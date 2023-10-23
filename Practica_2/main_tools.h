@@ -1,6 +1,17 @@
+// Universidad de La Laguna
+// Escuela Superior de Ingeniería y Tecnologíıa
+// Grado en Ingeniería Informática
+// Asignatura: Inteligencia Artificial
+// Curso: 3º
+// Práctica 3: Búsqueda en espacio de estados
+// Autor: Eduardo González Gutiérrez
+// Correo: alu0101461588@ull.edu.es
+// Fecha: 25/10/2023
+// Archivo main_tools.cc: Archivo que contiene las funciones del programa principal
+
 #include<fstream>
 
-#include "p02_aestar.h"
+#include "astar.h"
 
 // indica pasillo
 #define PASS_ID  0
@@ -20,7 +31,9 @@
 #define START_CHR "A"
 #define END_CHR   "B"
 
-
+/**
+ * @brief Función que comprueba si los parametros de entrada son correctos
+*/
 void Usage(int argc, char* argv[]) {
   if(argc != 2) {
     std::cout << argv[0] << ": Falta el fichero con el laberinto" << std::endl;
@@ -29,6 +42,10 @@ void Usage(int argc, char* argv[]) {
   }
 }
 
+/**
+ * @brief Función que muestra la ayuda del programa
+
+*/
 void Help() {
   std::cout << "Este programa calcula y muestra el camino más corto para salir del laberinto" << std::endl;
   std::cout << "Ejecución: ./p02_astar_main <fichero_laberinto>" << std::endl;
@@ -42,22 +59,13 @@ void Help() {
   exit(EXIT_SUCCESS);
 }
 
+/**
+ * @brief Función que muestra el menu del programa
 
-int main (int argc, char* argv[]) {
-  // Comprobamos que la ejecucion y los parametros sean correctos
-  if (std::string(argv[1]) == "--help") {
-    Help();
-    exit(EXIT_SUCCESS);
-  } else {
-    Usage(argc, argv); 
-  }
-
-  // Generamos el laberinto
-  Laberinto laberinto(argv[1]);
-
-
+*/
+void Menu(Laberinto& laberinto, int& heuristica, std::string fichero) {
   std::cout << "Porgrama que calcula y muestra el camino mas corto para salir del laberinto" << std::endl << std::endl;
-  std::cout << "El laberinto se ha generado a partir del fichero: " << argv[1] << std::endl;
+  std::cout << "El laberinto se ha generado a partir del fichero: " << fichero << std::endl;
   std::cout << "Numero de Filas: " << laberinto.get_numFilas() << " Numero de columnas: " << laberinto.get_numColumnas() << std::endl;
   
   std::cout << "Posicion de entrada al laberinto: " << "(" << laberinto.get_posEntrada().first << ", " << laberinto.get_posEntrada().second << ")"<< std::endl;
@@ -86,67 +94,54 @@ int main (int argc, char* argv[]) {
   std::cout << "Seleccione la Heurística que desea emplear: " << std::endl;
   std::cout << "1. Distancia Manhattan" << std::endl;
   std::cout << "2. Distancia Euclidea" << std::endl;
-  int heuristica;
   std::cin >> heuristica;
+}
 
-  // Buscamos la salida al laberinto
-  Astar astar;
- // astar.set_laberinto(laberinto);
-  
-  // Comprobamos si se ha encontrado el camino y lo imprimimos
-  if (astar.ObtenerCamino(laberinto, heuristica) == true) {
-    std::cout << "Se ha encontrado el camino al final del laberinto" << std::endl;
-    std::cout << "El camino es el siguiente: " << std::endl;
-    std::vector<Nodo> camino;
-
-    Nodo revisado = astar.get_nodosCerrados().back();
-    Nodo Final = astar.get_nodosCerrados().back();
-    astar.get_nodosCerrados().pop_back();
-
-    for(int i = astar.get_nodosCerrados().size(); i > 0; i--) {
-      for (auto& nodo : astar.get_nodosCerrados()) {
-        if (nodo.get_coordenadas() == revisado.get_Padre()) {
-          revisado = nodo;
-          camino.push_back(revisado);
-        }
-      }
-      
-    }
-    std::reverse(camino.begin(), camino.end());
-    camino.push_back(Final); 
-
-/*
-    for (int i = 0; i < camino.size(); i++) {
-      std::cout << "(" << camino[i].get_coordenadas().first << ", " << camino[i].get_coordenadas().second << ")" << std::endl;
-    }
+/**
+ * @brief Función que imprime el camino
 */
+void ImprimirCamino(const Astar astar, Laberinto laberinto) {
+  std::cout << "Se ha encontrado el camino al final del laberinto" << std::endl;
+  std::cout << "El camino es el siguiente: " << std::endl;
+  std::vector<Nodo> camino;
 
-    for(int i = 0; i < laberinto.get_numFilas(); i++) {
-      for(int j = 0; j < laberinto.get_numColumnas(); j++) {
-        if (laberinto.get_laberinto()[i][j] == WALL_ID) {
-          std::cout << WALL_CHR << " ";
-        } else {
-          bool encontrado = false;
-          for(auto& nodo : camino) {
-            if (nodo.get_coordenadas().first == i && nodo.get_coordenadas().second == j) {
-              std::cout << PATH_CHR << " ";
-              encontrado = true;
-            }
-          }
-          if (!encontrado) {
-            std::cout << PASS_CHR << " ";
+  Nodo revisado = astar.get_nodosCerrados().back();
+  Nodo Final = astar.get_nodosCerrados().back();
+  astar.get_nodosCerrados().pop_back();
+
+  for(int i = astar.get_nodosCerrados().size(); i > 0; i--) {
+    for (auto& nodo : astar.get_nodosCerrados()) {
+      if (nodo.get_coordenadas() == revisado.get_Padre()) {
+        revisado = nodo;
+        camino.push_back(revisado);
+      }
+    }
+      
+  }
+  std::reverse(camino.begin(), camino.end());
+  camino.push_back(Final); 
+
+  for(int i = 0; i < laberinto.get_numFilas(); i++) {
+    for(int j = 0; j < laberinto.get_numColumnas(); j++) {
+      if (laberinto.get_laberinto()[i][j] == WALL_ID) {
+        std::cout << WALL_CHR << " ";
+      } else {
+        bool encontrado = false;
+        for(auto& nodo : camino) {
+          if (nodo.get_coordenadas().first == i && nodo.get_coordenadas().second == j) {
+            std::cout << PATH_CHR << " ";
+            encontrado = true;
           }
         }
+        if (!encontrado) {
+          std::cout << PASS_CHR << " ";
+        }
       }
-      std::cout << std::endl;
     }
+    std::cout << std::endl;
+  }
 
-    std::cout << "El coste del camino es: " << Final.get_coste() << std::endl;
-    std::cout << "El número de nodos inspeccionados es: " << astar.get_nodosCerrados().size() << std::endl;
-    std::cout << "El número de nodos generados es: " << astar.get_nodosAbiertos().size() << std::endl;
-
-  } else 
-    std::cout << "No se ha encontrado el camino al final del laberinto" << std::endl;
-
-  return 0;
+  std::cout << "El coste del camino es: " << Final.get_coste() << std::endl;
+  std::cout << "El número de nodos inspeccionados es: " << astar.get_nodosCerrados().size() << std::endl;
+  std::cout << "El número de nodos generados es: " << astar.get_nodosAbiertos().size() << std::endl;
 }

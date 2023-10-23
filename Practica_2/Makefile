@@ -1,6 +1,6 @@
 CC=g++ 
 CXXFLAGS=-std=c++11 -g 
-PROGNAME=p02_astar
+PROGNAME=astar_main
 
 OBJS=$(patsubst %.cc,%.o,$(wildcard *.cc)) 
 all: ${OBJS} 

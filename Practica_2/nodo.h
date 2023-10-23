@@ -1,6 +1,18 @@
+// Universidad de La Laguna
+// Escuela Superior de Ingeniería y Tecnologíıa
+// Grado en Ingeniería Informática
+// Asignatura: Inteligencia Artificial
+// Curso: 3º
+// Práctica 3: Búsqueda en espacio de estados
+// Autor: Eduardo González Gutiérrez
+// Correo: alu0101461588@ull.edu.es
+// Fecha: 25/10/2023
+// Archivo nodo.h: En este archivo se definen la clase Nodo
+
 #include<iostream>
 #include <utility> // Necesario para std::pair
 
+// Clase Nodo
 class Nodo {
   public:
     Nodo(std::pair<int, int>, int, int, int, std::pair<int,int>); // Constructor de la clase Nodo
@@ -41,12 +53,3 @@ class Nodo {
     int FuncionF_; // Funcion f
     std::pair<int,int> Padre_; // Coordenadas del nodo padre
 };
-
-// Constructor de la clase Nodo
-Nodo::Nodo(std::pair<int, int> Coordenadas, int Coste, int Heuristico, int funcionF, std::pair<int,int> padre) {
-  Coordenadas_ = Coordenadas;
-  Coste_ = Coste;
-  Heuristico_ = Heuristico;
-  FuncionF_ = funcionF;
-  Padre_ = padre;
-}

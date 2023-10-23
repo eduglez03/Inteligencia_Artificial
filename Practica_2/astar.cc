@@ -1,54 +1,19 @@
-#include<iostream>
-#include<vector>
-#include<set>
-#include<queue>
-#include<utility>
-#include <algorithm> // Para std::min_element
-#include <cmath> // Para std::sqrt
+// Universidad de La Laguna
+// Escuela Superior de Ingeniería y Tecnologíıa
+// Grado en Ingeniería Informática
+// Asignatura: Inteligencia Artificial
+// Curso: 3º
+// Práctica 3: Búsqueda en espacio de estados
+// Autor: Eduardo González Gutiérrez
+// Correo: alu0101461588@ull.edu.es
+// Fecha: 25/10/2023
+// Archivo p02_astar.cc: Archivo que contiene la implementación de las funciones de la clase Astar
 
-#include "p02_nodo.h"
-#include "laberinto.h"
+#include "astar.h"
 
-
-// Enumerar las direcciones posibles:
-enum direciones {A, AD, D, DB, B, BI, I, IA};
-
-//Definimos vectores de desplazamientos para cada direccion;
-//                            A    AB    D    DB    B    BI    I    IA
-const short movimiento_i[] = {-1, -1,   0,    1,    1,   1,    0,   -1};
-const short movimiento_j[] = {0,   1,   1,    1,    0,   -1,  -1,   -1};
-
-class Astar {
-  public:
-    Astar() {}; // Constructor por defecto
-
-    // Getters
-    std::vector<Nodo> get_nodosCerrados() const {return nodosCerrados_;}
-    std::vector<Nodo> get_nodosAbiertos() const { return nodosAbiertos_; }
-
-    // Setters
-    //void set_laberinto(Laberinto laberinto) { laberinto_ = laberinto; } 
-
-
-    // Funcion
-    int Manhattan(const std::pair<int, int>& origen, const std::pair<int, int>& destino);
-    int Euclidea(const std::pair<int, int>& origen, const std::pair<int, int>& destino);
-    int CalularF(int heuristico, int coste);
-    Nodo MenorCoste();
-    bool ObtenerCamino(Laberinto& laberinto, int heuristica);
-    bool ComprobarAbiertos(const Nodo& nodo);
-    bool ComprobarCerrados(const Nodo& nodo);
-    bool ActualizarCoste(const Nodo& nodo);
-
-  private:
-   // Laberinto laberinto_; // Laberinto
-    std::vector<Nodo> nodosCerrados_; // Lista de nodos cerrados
-    std::vector<Nodo> nodosAbiertos_; // Cola de nodos abiertos
-    const int costeHV_ = 5; // Valor del coste horizontal y vertical
-    const int costeDiagonal_ = 7; // Valor coste diagonal
-};
-
-// Obtener el nodo de menor coste de la lista de nodos abiertos
+/**
+ * @brief Función que obtiene el nodo de menor coste de la lista de nodos abiertos
+*/
 Nodo Astar::MenorCoste() {
   if (nodosAbiertos_.empty()) {
     throw std::runtime_error("La lista de nodos abiertos está vacía.");
@@ -66,7 +31,9 @@ Nodo Astar::MenorCoste() {
   return minimo;
 }
 
-// Metodo que calcula el heuristico del nodo
+/**
+ * @brief Función que calcula la heurística de Manhattan
+*/
 int Astar::Manhattan(const std::pair<int, int>& origen, const std::pair<int, int>& destino) {
   const int constante{3};
   
@@ -79,7 +46,9 @@ int Astar::Manhattan(const std::pair<int, int>& origen, const std::pair<int, int
   return heuristica;
 }
 
-// Metodo que calcula el heuristico del nodo
+/**
+ * @brief Función que calcula la heurística de Euclidea
+*/
 int Astar::Euclidea(const std::pair<int, int>& origen, const std::pair<int, int>& destino) {
   // Fórmula de la distancia euclidiana: sqrt((x2 - x1)^2 + (y2 - y1)^2)
   double distanciaX = destino.first - origen.first;
@@ -89,12 +58,16 @@ int Astar::Euclidea(const std::pair<int, int>& origen, const std::pair<int, int>
 }
 
 
-// Metodo que calcula la funcion F
+/**
+ * @brief Función que calcula la función F
+*/
 int Astar::CalularF(int heuristico, int coste) {
   return (heuristico + coste);
 }
 
-// Metodo que comprueba si el nodo ya esta en la lista de nodos cerrados
+/**
+ * @brief Función que comprueba si el nodo ya esta en la lista de nodos cerrados
+*/
 bool Astar::ComprobarCerrados(const Nodo& nodo) {
   for (int i = 0; i < nodosCerrados_.size(); i++) {
    if (nodosCerrados_[i].get_coordenadas() == nodo.get_coordenadas()) {
@@ -104,7 +77,9 @@ bool Astar::ComprobarCerrados(const Nodo& nodo) {
   return false;
 }
 
-// Metodo que comprueba si el nodo ya esta en la lista de nodos abiertos
+/**
+ * @brief Función que comprueba si el nodo ya esta en la lista de nodos abiertos
+*/
 bool Astar::ComprobarAbiertos(const Nodo& nodo) {
   for (int i = 0; i < nodosAbiertos_.size(); i++) {
    if (nodosAbiertos_[i].get_coordenadas() == nodo.get_coordenadas()) {
@@ -114,8 +89,9 @@ bool Astar::ComprobarAbiertos(const Nodo& nodo) {
   return false;
 }
 
-// Metodo que actualiza la lista de nodos abiertos si el nodo que estamos analizando tiene un coste menor
-// Metodo que actualiza la lista de nodos abiertos si el nood que estamos analizando tiene un coste menor
+/**
+ * @brief Función que actualiza la lista de nodos abiertos si el nodo que estamos analizando tiene un coste menor
+*/
 bool Astar::ActualizarCoste(const Nodo& nodo) {
   for (int i = 0; i < nodosAbiertos_.size(); i++) {
     if (nodosAbiertos_[i].get_coordenadas() == nodo.get_coordenadas()) {
@@ -128,7 +104,9 @@ bool Astar::ActualizarCoste(const Nodo& nodo) {
   return false;
 }
 
-// Método para obtener el camino
+/**
+ * @brief Función que obtiene el camino
+*/
 bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica) {
   // Creamos un nuevo nodo con las coordenadas del nodo inicial y final
   std::pair<int,int> coordenadaspadre(-1,-1);
@@ -202,7 +180,6 @@ bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica) {
       nodosCerrados_.push_back(actual);
     }
 
-
     // Eliminamos el nodo actual de la lista de nodos abiertos
     for (auto iterador = nodosAbiertos_.begin(); iterador != nodosAbiertos_.end(); ++iterador) {
       if (iterador->get_coordenadas() == actual.get_coordenadas()) {
@@ -215,4 +192,3 @@ bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica) {
   // No se encontró un camino
   return false;
 }
-
