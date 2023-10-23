@@ -150,7 +150,7 @@ bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica) {
       if (sucesor_pos != actual.get_coordenadas()) {
         if (nuevo_i <= laberinto.get_numFilas() && nuevo_j <= laberinto.get_numColumnas() && nuevo_i >= 0 && nuevo_j >= 0) {
           if (laberinto.get_laberinto()[nuevo_i][nuevo_j] != 1) {
-            int g_sucesor = actual.get_coste() + ((dir % 2 == 0) ? 5 : 7);
+            int g_sucesor = actual.get_coste() + ((dir % 2 == 0) ? 5 : 10);
             
             if(heuristica == 1) {
               int h_sucesor = Manhattan(sucesor_pos, laberinto.get_posSalida());
