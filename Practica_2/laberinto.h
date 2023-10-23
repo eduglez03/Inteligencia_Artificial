@@ -8,7 +8,7 @@ class Laberinto {
     Laberinto() {}; // Constructor por defecto (no se usa)
 
     // Getters
-    std::vector<std::vector<int>> get_laberinto() { return laberinto_; }
+    std::vector<std::vector<int>>& get_laberinto() { return laberinto_; }
     int get_numFilas() const { return numeroFilas_; }
     int get_numColumnas() const { return numeroColumnas_; }
     std::pair<int, int> get_posEntrada() const { return posEntrada_; }
@@ -42,7 +42,7 @@ Laberinto::Laberinto(char* fichero_entrada) {
   fichero >> numeroFilas_;  // Almacenamos el numero de filas de la matriz
   fichero >> numeroColumnas_; // Almacenamos el numero de columnas de la matriz
 
-  laberinto_.resize(numeroFilas_ + 1 , std::vector<int>(numeroColumnas_ + 1, 0)); // Resize de la matriz con las filas y columnas
+  laberinto_.resize(numeroFilas_ + 1, std::vector<int>(numeroColumnas_ + 1, 0)); // Resize de la matriz con las filas y columnas
 
   for (int i = 0; i < numeroFilas_; i++) {
     for (int j = 0; j < numeroColumnas_; j++) {

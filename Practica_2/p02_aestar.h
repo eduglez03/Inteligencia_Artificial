@@ -27,7 +27,7 @@ class Astar {
     std::vector<Nodo> get_nodosAbiertos() const { return nodosAbiertos_; }
 
     // Setters
-    void set_laberinto(Laberinto laberinto) { laberinto_ = laberinto; } 
+    //void set_laberinto(Laberinto laberinto) { laberinto_ = laberinto; } 
 
 
     // Funcion
@@ -35,13 +35,13 @@ class Astar {
     int Euclidea(const std::pair<int, int>& origen, const std::pair<int, int>& destino);
     int CalularF(int heuristico, int coste);
     Nodo MenorCoste();
-    bool ObtenerCamino(const std::pair<int, int>, const std::pair<int, int>, int heuristica);
+    bool ObtenerCamino(Laberinto& laberinto, int heuristica);
     bool ComprobarAbiertos(const Nodo& nodo);
     bool ComprobarCerrados(const Nodo& nodo);
     bool ActualizarCoste(const Nodo& nodo);
 
   private:
-    Laberinto laberinto_; // Laberinto
+   // Laberinto laberinto_; // Laberinto
     std::vector<Nodo> nodosCerrados_; // Lista de nodos cerrados
     std::vector<Nodo> nodosAbiertos_; // Cola de nodos abiertos
     const int costeHV_ = 5; // Valor del coste horizontal y vertical
@@ -129,17 +129,17 @@ bool Astar::ActualizarCoste(const Nodo& nodo) {
 }
 
 // Método para obtener el camino
-bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int, int> destino, int heuristica) {
+bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica) {
   // Creamos un nuevo nodo con las coordenadas del nodo inicial y final
   std::pair<int,int> coordenadaspadre(-1,-1);
-  Nodo Inicio(inicio,0,0,0, coordenadaspadre);
+  Nodo Inicio(laberinto.get_posEntrada(),0,0,0, coordenadaspadre);
 
   // Establecemos valores iniciales al primer nodo
   if(heuristica == 1) {
-    Inicio.set_heuristico(Manhattan(Inicio.get_coordenadas(), destino));
+    Inicio.set_heuristico(Manhattan(Inicio.get_coordenadas(), laberinto.get_posSalida()));
   }
   else if (heuristica == 2) {
-    Inicio.set_heuristico(Euclidea(Inicio.get_coordenadas(), destino));
+    Inicio.set_heuristico(Euclidea(Inicio.get_coordenadas(), laberinto.get_posSalida()));
   }
   else {
     throw std::runtime_error("La heurística seleccionada no es válida.");
@@ -158,7 +158,7 @@ bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int,
     
 
     // Si el nodo actual es igual al final se encontro el camino minimo
-    if (actual.get_coordenadas() == destino) { 
+    if (actual.get_coordenadas() == laberinto.get_posSalida()) { 
       nodosCerrados_.push_back(actual);
       return true;
     }
@@ -170,22 +170,26 @@ bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int,
       std::pair<int, int> sucesor_pos(nuevo_i, nuevo_j);
 
       if (sucesor_pos != actual.get_coordenadas()) {
-        if (nuevo_i <= laberinto_.get_numFilas() && nuevo_j <= laberinto_.get_numColumnas() && nuevo_i >= 0 && nuevo_j >= 0) {
-          if (laberinto_.get_laberinto()[nuevo_i][nuevo_j] != 1) {
+        if (nuevo_i <= laberinto.get_numFilas() && nuevo_j <= laberinto.get_numColumnas() && nuevo_i >= 0 && nuevo_j >= 0) {
+          if (laberinto.get_laberinto()[nuevo_i][nuevo_j] != 1) {
             int g_sucesor = actual.get_coste() + ((dir % 2 == 0) ? 5 : 7);
             
             if(heuristica == 1) {
-              int h_sucesor = Manhattan(sucesor_pos, destino);
+              int h_sucesor = Manhattan(sucesor_pos, laberinto.get_posSalida());
               Nodo sucesor(sucesor_pos, g_sucesor, h_sucesor, g_sucesor + h_sucesor, actual.get_coordenadas());
-              if (!ComprobarCerrados(sucesor) && !ActualizarCoste(sucesor)) {
+              if (!ComprobarCerrados(sucesor) && !ComprobarAbiertos(sucesor)) {
                 nodosAbiertos_.push_back(sucesor);
+              } else {
+                ActualizarCoste(sucesor);
               }
             }
             else if (heuristica == 2) {
-              int h_sucesor = Euclidea(sucesor_pos, destino);
+              int h_sucesor = Euclidea(sucesor_pos, laberinto.get_posSalida());
               Nodo sucesor(sucesor_pos, g_sucesor, h_sucesor, g_sucesor + h_sucesor, actual.get_coordenadas());
-              if (!ComprobarCerrados(sucesor) && !ActualizarCoste(sucesor)) {
+              if (!ComprobarCerrados(sucesor) && !ComprobarAbiertos(sucesor)) {
                 nodosAbiertos_.push_back(sucesor);
+              } else {
+                ActualizarCoste(sucesor);
               }
             }
           }
@@ -211,8 +215,4 @@ bool Astar::ObtenerCamino(const std::pair<int, int> inicio, const std::pair<int,
   // No se encontró un camino
   return false;
 }
-
-
-
-
 
