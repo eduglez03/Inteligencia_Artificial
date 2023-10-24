@@ -141,6 +141,16 @@ void ImprimirCamino(const Astar& astar, Laberinto laberinto, const std::vector<N
     std::cout << std::endl;
   }
 
+  std::cout << "El camino es el siguiente: " << std::endl;
+  for (auto& nodo : camino) {
+    if (nodo == camino.back()) {
+      std::cout << "(" << nodo.get_coordenadas().first << ", " << nodo.get_coordenadas().second << ")";
+    } else {
+    std::cout << "(" << nodo.get_coordenadas().first << ", " << nodo.get_coordenadas().second << ") --> ";
+    }
+  }
+  std::cout << std::endl;
+
   std::cout << "El coste del camino es: " << Final.get_coste() << std::endl;
   std::cout << "El número de nodos inspeccionados es: " << astar.get_nodosCerrados().size() << std::endl;
   std::cout << "El número de nodos generados es: " << generados.size() << std::endl;

@@ -1,0 +1,23 @@
+Porgrama que calcula y muestra el camino mas corto para salir del laberinto
+
+El laberinto se ha generado a partir del fichero: InputFile_3.txt
+Numero de Filas: 5 Numero de columnas: 5
+Posicion de entrada al laberinto: (4, 4)
+Posicion de salida al laberinto: (1, 0)
+
+¿Quiere cambiar las posiciones de entrada y salida? (s/n)
+Seleccione la Heurística que desea emplear: 
+1. Distancia Manhattan
+2. Distancia Euclidea
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ * *     
+*   █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (0, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 28
+El número de nodos generados es: 27

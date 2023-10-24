@@ -132,8 +132,6 @@ bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica, std::vector<Nodo
   // Mientras la lista de nodos abiertos no este vacia
   while (!nodosAbiertos_.empty()) {
     Nodo actual = MenorCoste(); // Obtenemos el nodo de menor coste de la lista de nodos abiertos
-    //ActualizarCoste(actual);
-    
 
     // Si el nodo actual es igual al final se encontro el camino minimo
     if (actual.get_coordenadas() == laberinto.get_posSalida()) { 
@@ -150,7 +148,7 @@ bool Astar::ObtenerCamino(Laberinto& laberinto, int heuristica, std::vector<Nodo
       if (sucesor_pos != actual.get_coordenadas()) {
         if (nuevo_i <= laberinto.get_numFilas() && nuevo_j <= laberinto.get_numColumnas() && nuevo_i >= 0 && nuevo_j >= 0) {
           if (laberinto.get_laberinto()[nuevo_i][nuevo_j] != 1) {
-            int g_sucesor = actual.get_coste() + ((dir % 2 == 0) ? 5 : 10);
+            int g_sucesor = actual.get_coste() + ((dir % 2 == 0) ? 5 : 7);
             
             if(heuristica == 1) {
               int h_sucesor = Manhattan(sucesor_pos, laberinto.get_posSalida());
