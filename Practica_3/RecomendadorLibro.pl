@@ -2,14 +2,32 @@
 :- dynamic programa_ejecutado/0.
 
 % Base de conocimiento de libros y sus características
-libro('El nombre del viento', ['Fantasía', 'Aventura', 'Magia']).
-libro('1984', ['Ciencia ficción', 'Distopía']).
-libro('Cien años de soledad', ['Realismo mágico', 'Ficción']).
-libro('El señor de los anillos', ['Fantasía', 'Aventura']).
-libro('Crimen y castigo', ['Novela', 'Psicológico']).
-libro('Los pilares de la Tierra', ['Histórico', 'Drama']).
-libro('Juego de tronos', ['Fantasía', 'Aventura']).
-libro('El fin de la eternidad', ['Ciencia ficción', 'Viajes en el tiempo']).
+libro('El nombre del viento', ['Fantasía', 'Aventura', 'Magia'], 'Patrick Rothfuss').
+libro('1984', ['Ciencia ficción', 'Distopía'], 'George Orwell').
+libro('Cien años de soledad', ['Realismo mágico', 'Ficción'], 'Gabriel García Márquez').
+libro('El señor de los anillos', ['Fantasía', 'Aventura'], 'J.R.R. Tolkien').
+libro('Crimen y castigo', ['Novela', 'Psicológico'], 'Fyodor Dostoevsky').
+libro('Los pilares de la Tierra', ['Histórico', 'Drama'], 'Ken Follett').
+libro('Juego de tronos', ['Fantasía', 'Aventura'], 'George R.R. Martin').
+libro('El fin de la eternidad', ['Ciencia ficción', 'Viajes en el tiempo'], 'Isaac Asimov').
+libro('Harry Potter y la piedra filosofal', ['Fantasía', 'Aventura'], 'J.K. Rowling').
+libro('Dune', ['Ciencia ficción', 'Aventura'], 'Frank Herbert').
+libro('Orgullo y prejuicio', ['Romance', 'Clásico'], 'Jane Austen').
+libro('Crónica de una muerte anunciada', ['Ficción', 'Drama'], 'Gabriel García Márquez').
+libro('Las Crónicas de Narnia', ['Fantasía', 'Aventura'], 'C.S. Lewis').
+libro('Ready Player One', ['Ciencia ficción', 'Aventura'], 'Ernest Cline').
+libro('El retrato de Dorian Gray', ['Clásico', 'Drama'], 'Oscar Wilde').
+libro('El Alquimista', ['Ficción', 'Aventura'], 'Paulo Coelho').
+libro('La Sombra del Viento', ['Misterio', 'Ficción'], 'Carlos Ruiz Zafón').
+libro('Sapiens: De animales a dioses', ['Historia', 'Ensayo'], 'Yuval Noah Harari').
+libro('El código Da Vinci', ['Misterio', 'Thriller'], 'Dan Brown').
+libro('Los Juegos del Hambre', ['Ciencia ficción', 'Aventura'], 'Suzanne Collins').
+libro('El Hobbit', ['Fantasía', 'Aventura'], 'J.R.R. Tolkien').
+libro('Los hombres que no amaban a las mujeres', ['Thriller', 'Misterio'], 'Stieg Larsson').
+libro('La chica del tren', ['Thriller', 'Drama'], 'Paula Hawkins').
+libro('It', ['Terror', 'Thriller'], 'Stephen King').
+libro('El Silmarillion', ['Fantasía', 'Aventura'], 'J.R.R. Tolkien').
+libro('La Odisea', ['Épico', 'Aventura'], 'Homero').
 
 % Mensaje explicativo
 :- not(programa_ejecutado),
