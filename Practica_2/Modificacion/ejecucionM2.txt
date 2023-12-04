@@ -1,0 +1,240 @@
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 91
+El número de nodos generados es: 113
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 93
+El número de nodos generados es: 113
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 94
+El número de nodos generados es: 113
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 95
+El número de nodos generados es: 113
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 96
+El número de nodos generados es: 113
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 97
+El número de nodos generados es: 113
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 98
+El número de nodos generados es: 113
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 99
+El número de nodos generados es: 113
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 100
+El número de nodos generados es: 113
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█       █                       █ 
+█       █                       █ 
+█       █                       █ 
+* *     █       █       █ █ █ █ █ 
+█   *   █       █       █       █ 
+█     * █       █       █       █ 
+█     * █       █       █       █ 
+█     * █ █ █ █ █       █       █ 
+█       *               █       █ 
+█         *             █       █ 
+█           * * *       █       █ 
+█       █ █ █ █ █ * * * █ * * * * 
+█       █               *       █ 
+█       █                       █ 
+█       █                       █ 
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+El camino es el siguiente: 
+(4, 0) --> (4, 1) --> (5, 2) --> (6, 3) --> (7, 3) --> (8, 3) --> (9, 4) --> (10, 5) --> (11, 6) --> (11, 7) --> (11, 8) --> (12, 9) --> (12, 10) --> (12, 11) --> (13, 12) --> (12, 13) --> (12, 14) --> (12, 15) --> (12, 16)
+El coste del camino es: 106
+El número de nodos inspeccionados es: 101
+El número de nodos generados es: 113

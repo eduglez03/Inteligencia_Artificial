@@ -1,0 +1,120 @@
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 26
+El número de nodos generados es: 27
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 27
+El número de nodos generados es: 27
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 28
+El número de nodos generados es: 27
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 29
+El número de nodos generados es: 27
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 30
+El número de nodos generados es: 27
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 31
+El número de nodos generados es: 27
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 32
+El número de nodos generados es: 27
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 33
+El número de nodos generados es: 27
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 34
+El número de nodos generados es: 27
+Se ha encontrado el camino al final del laberinto
+El camino es el siguiente: 
+█   *     
+* * █ *   
+  █ █ █ * 
+  █     * 
+  █ █   * 
+El camino es el siguiente: 
+(4, 4) --> (3, 4) --> (2, 4) --> (1, 3) --> (0, 2) --> (1, 1) --> (1, 0)
+El coste del camino es: 36
+El número de nodos inspeccionados es: 35
+El número de nodos generados es: 27

@@ -42,19 +42,62 @@ int obtenerValorAleatorioEnRango(const std::vector<int>& vec) {
  * @brief Función que obtiene el nodo de menor coste de la lista de nodos abiertos
 */
 Nodo Astar::MenorCoste() {
-  if (nodosAbiertos_.empty()) {
-    throw std::runtime_error("La lista de nodos abiertos está vacía.");
+
+  std::vector<Nodo> copiaAbiertos;
+
+  // Almacenamos todos los nodos de abiertos en copiaAbiertos
+  for (int i = 0; i < nodosAbiertos_.size(); i++) {
+    copiaAbiertos.push_back(nodosAbiertos_[i]);
   }
+  
+  Nodo minimo1 = copiaAbiertos[0];
 
-  Nodo minimo = nodosAbiertos_[0];
-  size_t indiceMinimo = 0;
-
-  for (size_t i = 1; i < nodosAbiertos_.size(); ++i) {
-    if (nodosAbiertos_[i].get_funcionF() < minimo.get_funcionF()) {
-      minimo = nodosAbiertos_[i];
-      indiceMinimo = i;
+  // Buscamos el primero de menor coste
+  for (size_t i = 1; i < copiaAbiertos.size(); ++i) {
+    if (copiaAbiertos[i].get_funcionF() < minimo1.get_funcionF()) {
+      minimo1 = copiaAbiertos[i];
     }
   }
+  
+  // Eliminamos el nodo de menor coste de la copia de la lista de nodos abiertos
+  for (auto iterador = copiaAbiertos.begin(); iterador != copiaAbiertos.end(); ++iterador) {
+    if (iterador->get_coordenadas() == minimo1.get_coordenadas()) {
+      copiaAbiertos.erase(iterador);
+      break;
+    }
+  }
+
+  Nodo minimo2 = copiaAbiertos[0];
+  // Buscamos el segundo de menor coste
+  for (size_t i = 1; i < copiaAbiertos.size(); ++i) {
+    if (copiaAbiertos[i].get_funcionF() < minimo2.get_funcionF()) {
+      minimo2 = copiaAbiertos.at(i);
+    }
+  }
+
+  // Eliminamos el nodo de menor coste de la copia de la lista de nodos abiertos
+  for (auto iterador = copiaAbiertos.begin(); iterador != copiaAbiertos.end(); ++iterador) {
+    if (iterador->get_coordenadas() == minimo2.get_coordenadas()) {
+      copiaAbiertos.erase(iterador);
+      break;
+    }
+  }
+
+  Nodo minimo;
+  std::vector<Nodo> minimos;
+  minimos.push_back(minimo1);
+  minimos.push_back(minimo2);
+
+  // Inicializar la semilla para generar números aleatorios
+  std::srand(std::time(0));
+
+  // Obtener nodo aleatorio dentro del vector de minimos
+  int indiceAleatorio = std::rand() % minimos.size();
+
+  minimo = minimos[indiceAleatorio];
+
+  copiaAbiertos.clear();
+
   return minimo;
 }
 
