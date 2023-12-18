@@ -10,24 +10,6 @@ libro('Crimen y castigo', ['Novela', 'Psicológico'], 'Fyodor Dostoevsky').
 libro('Los pilares de la Tierra', ['Histórico', 'Drama'], 'Ken Follett').
 libro('Juego de tronos', ['Fantasía', 'Aventura'], 'George R.R. Martin').
 libro('El fin de la eternidad', ['Ciencia ficción', 'Viajes en el tiempo'], 'Isaac Asimov').
-libro('Harry Potter y la piedra filosofal', ['Fantasía', 'Aventura'], 'J.K. Rowling').
-libro('Dune', ['Ciencia ficción', 'Aventura'], 'Frank Herbert').
-libro('Orgullo y prejuicio', ['Romance', 'Clásico'], 'Jane Austen').
-libro('Crónica de una muerte anunciada', ['Ficción', 'Drama'], 'Gabriel García Márquez').
-libro('Las Crónicas de Narnia', ['Fantasía', 'Aventura'], 'C.S. Lewis').
-libro('Ready Player One', ['Ciencia ficción', 'Aventura'], 'Ernest Cline').
-libro('El retrato de Dorian Gray', ['Clásico', 'Drama'], 'Oscar Wilde').
-libro('El Alquimista', ['Ficción', 'Aventura'], 'Paulo Coelho').
-libro('La Sombra del Viento', ['Misterio', 'Ficción'], 'Carlos Ruiz Zafón').
-libro('Sapiens: De animales a dioses', ['Historia', 'Ensayo'], 'Yuval Noah Harari').
-libro('El código Da Vinci', ['Misterio', 'Thriller'], 'Dan Brown').
-libro('Los Juegos del Hambre', ['Ciencia ficción', 'Aventura'], 'Suzanne Collins').
-libro('El Hobbit', ['Fantasía', 'Aventura'], 'J.R.R. Tolkien').
-libro('Los hombres que no amaban a las mujeres', ['Thriller', 'Misterio'], 'Stieg Larsson').
-libro('La chica del tren', ['Thriller', 'Drama'], 'Paula Hawkins').
-libro('It', ['Terror', 'Thriller'], 'Stephen King').
-libro('El Silmarillion', ['Fantasía', 'Aventura'], 'J.R.R. Tolkien').
-libro('La Odisea', ['Épico', 'Aventura'], 'Homero').
 
 % Mensaje explicativo
 :- not(programa_ejecutado),
@@ -71,7 +53,7 @@ goodbye :- throw(finalizar_programa).
 
 % Reglas para la recomendación
 recomendarLibros(Categoria) :-
-    findall(Titulo, (libro(Titulo, Categorias), member(Categoria, Categorias), not(favorito(Titulo, _, _, _))), Libros),
+    findall(Titulo-Autor, (libro(Titulo, Categorias, Autor), member(Categoria, Categorias), not(favorito(Titulo, _, _, _))), Libros),
     mostrarLibros(Libros, Categoria),
     menu.
 
@@ -85,8 +67,8 @@ mostrarLibros(Libros, Categoria) :-
 
 mostrarLibrosAux([], _).
 
-mostrarLibrosAux([Libro|Resto], N) :-
-    write(N), write('. '), write(Libro), nl,
+mostrarLibrosAux([Titulo-Autor|Resto], N) :-
+    write(N), write('. '), write(Titulo), write(' (Autor: '), write(Autor), write(')'), nl,
     N1 is N + 1,
     mostrarLibrosAux(Resto, N1).
 
@@ -95,8 +77,8 @@ seleccionarLibro(Libros, Categoria) :-
     write('Seleccione el número del libro que desea recomendar (1-' ), write(NumLibros), write('): '),
     read(Seleccion),
     (Seleccion >= 1, Seleccion =< NumLibros ->
-        nth1(Seleccion, Libros, Titulo),
-        recomendarLibro(Titulo, Categoria),
+        nth1(Seleccion, Libros, Titulo-Autor),
+        recomendarLibro(Titulo, Autor, Categoria),
         nl,
         preguntarAgregarFavorito(Titulo)
         ;
@@ -105,8 +87,8 @@ seleccionarLibro(Libros, Categoria) :-
     ).
 
 % Reglas para la recomendación individual
-recomendarLibro(Titulo, Categoria) :-
-    write('Te recomiendo el libro: '), write(Titulo), write(' (Categoría: '), write(Categoria), write(')'), nl.
+recomendarLibro(Titulo, Autor, Categoria) :-
+    write('Te recomiendo el libro: '), write(Titulo), write(' (Autor: '), write(Autor), write(') (Categoría: '), write(Categoria), write(')'), nl.
 
 % Preguntar al usuario si desea agregar un libro a favoritos
 preguntarAgregarFavorito(Titulo) :-
@@ -131,8 +113,8 @@ agregarFavorito(Titulo, Leido, Descripcion, Calificacion) :-
 mostrarFavoritos :-
     write('Tus libros favoritos son: '), nl,
     favorito(Titulo, Leido, Descripcion, Calificacion),
-    write('- '), write(Titulo), write(', Leído: '), write(Leido),
-    write(', Descripción: '), write(Descripcion), write(', Calificación: '), write(Calificacion), nl,
+    write('- '), write(Titulo), write(' (Leído: '), write(Leido),
+    write(', Descripción: '), write(Descripcion), write(', Calificación: '), write(Calificacion), write(')'), nl,
     fail.
 mostrarFavoritos.
 
